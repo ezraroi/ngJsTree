@@ -1,0 +1,34 @@
+{
+    "name": "ngJsTree",
+    "main": "dist/ngJsTree.min.js",
+    "version": "0.0.0",
+    "homepage": "https://github.com/ezraroi/ngJsTree",
+    "authors": [
+        "ezraroi <ezraroi@gmail.com>"
+    ],
+    "description": "Angular directive for the famous JsTree",
+    "keywords": [
+        "Angular",
+        "JsTree"
+    ],
+    "dependencies": {
+        "angular": "~1.2",
+        "jstree" : "~3.0.3"
+    },
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "temp",
+        "demo",
+        "Gruntfile.js",
+        "package.json",
+        "README.md"
+    ],
+    "devDependencies": {
+        "angular-mocks": "~1.2.16",
+        "jquery": "~2.1.0"
+    }
+}
