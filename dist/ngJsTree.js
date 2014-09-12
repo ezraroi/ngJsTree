@@ -1,8 +1,7 @@
-
+'use strict';
 
 angular.module('ngJsTree',[]);
 angular.module('ngJsTree').controller('jsTreeCtrl', function($scope) {
-    'use strict';
     var nodeSerialId = 1;
     this.nodes = $scope.treeData;
 

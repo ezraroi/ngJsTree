@@ -19,8 +19,8 @@ module.exports = function (grunt) {
                     livereloadOnError: false,
                     spawn: false
                 },
-                files: ['nodeJsTree.js','dist/**/*','demo/**/*'],
-                tasks: ['jshint','build']
+                files: ['ngJsTree.js','dist/**/*','demo/**/*'],
+                tasks: ['jshint','test']
             }
         },
         jshint: {
@@ -31,12 +31,16 @@ module.exports = function (grunt) {
                 src: 'ngJsTree.js'
             }
         },
-        jasmine: {
+        karma: {
             unit: {
-                src: ['./bower_components/jquery/dist/jquery.js','./bower_components/angular/angular.js','./bower_components/angular-animate/angular-animate.js','./bower_components/angular-mocks/angular-mocks.js','./dist/angular-busy.js','./demo/demo.js'],
-                options: {
-                    specs: 'test/*.js'
-                }
+                configFile: 'karma.conf.js'
+            }
+        },
+        copy: {
+            main: {
+                files: [
+                    {src:'ngJsTree.js',dest:'dist/'}
+                ]
             }
         },
         uglify: {
@@ -48,7 +52,9 @@ module.exports = function (grunt) {
         }
     });
 
+    grunt.loadNpmTasks('grunt-karma');
+
     grunt.registerTask('serve', ['jshint','connect', 'watch']);
-    grunt.registerTask('build',['uglify']);
-    grunt.registerTask('test',['build','jasmine']);
+    grunt.registerTask('build',['uglify','copy']);
+    grunt.registerTask('test',['build','karma']);
 };
