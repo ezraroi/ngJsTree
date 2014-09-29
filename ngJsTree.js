@@ -1,5 +1,4 @@
 (function (angular) {
-    'use strict';
 
     //// JavaScript Code ////
     function jsTreeCtrl($scope) {
