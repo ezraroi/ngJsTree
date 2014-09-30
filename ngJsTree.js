@@ -2,6 +2,7 @@
 
     //// JavaScript Code ////
     function jsTreeCtrl($scope) {
+        /*jshint validthis:true *
         var nodeSerialId = 1;
         this.nodes = $scope.treeData;
 
