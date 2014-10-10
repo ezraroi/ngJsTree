@@ -1,8 +1,9 @@
 (function (angular) {
+    'use strict';
 
     //// JavaScript Code ////
     function jsTreeCtrl($scope) {
-        /*jshint validthis:true *
+        /*jshint validthis:true */
         var nodeSerialId = 1;
         this.nodes = $scope.treeData;
 
@@ -92,13 +93,16 @@
         return {
             restrict: 'A',
             scope: {
-                treeData: '=ngModel'
+                treeData: '=ngModel',
+                shouldApply : '&'
             },
             controller: 'jsTreeCtrl',
             link: function (scope, elm, attrs, controller) {
 
                 var config = null,
                     nodesWatcher = controller.changeWatcher(controller.nodes, controller.nodesFingerprint);
+
+                var blocked = false;
 
                 function manageEvents(s, e, a) {
                     if (a.treeEvents) {
@@ -129,7 +133,7 @@
                 }
 
                 scope.destroy = function () {
-                    $log.debug('jsTree: destroy called');
+                    $log.debug('jsTree: destroy()');
                     if (attrs.tree) {
                         scope.tree = scope.$parent[attrs.tree] = elm;
                     } else {
@@ -139,7 +143,7 @@
                 };
 
                 scope.init = function () {
-                    $log.debug('jsTree: init called');
+                    $log.debug('jsTree: init()');
                     scope.tree.jstree(config);
                     manageEvents(scope, elm, attrs);
                 };
@@ -150,10 +154,14 @@
                 };
 
                 nodesWatcher.onAdded = function (node) {
+                    while(blocked) {}
+                    blocked = true;
                     var parent = scope.tree.jstree(true).get_node(node.parent);
-                    var res = scope.tree.jstree(true).create_node(parent, node, 'inside', angular.noop);
+                    var res = scope.tree.jstree(true).create_node(parent, node, 'inside',function() {
+                        blocked = false;
+                    });
                     if (!res) {
-                        $log.warn('jsTree: res is ' + res);
+                        blocked = false;
                     }
                 };
 
@@ -162,7 +170,10 @@
                 };
 
                 nodesWatcher.subscribe(scope, function () {
-                    return true;
+                    if (!scope.shouldApply) {
+                        return true;
+                    }
+                    return scope.shouldApply();
                 });
 
                 scope.$watch(getOptions, function () {
