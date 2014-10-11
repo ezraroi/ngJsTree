@@ -1,7 +1,8 @@
-'use strict';
+
 
 angular.module('ngJsTree',[]);
 angular.module('ngJsTree').controller('jsTreeCtrl', function($scope) {
+    'use strict';
     var nodeSerialId = 1;
     this.nodes = $scope.treeData;
 
@@ -105,7 +106,7 @@ angular.module('ngJsTree').directive('jsTree', function($log) {
                         if (evMap[i].length > 0) {
                             var evt = evMap[i].split(':')[0] + '.jstree',
                                 cb = evMap[i].split(':')[1];
-                            s.tree.on(evt, s.$parent[cb]);
+                            s.tree.on(evt, s.$parent.$eval(cb));
                         }
                     }
                 }

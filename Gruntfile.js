@@ -8,7 +8,9 @@ module.exports = function (grunt) {
         connect: {
             main: {
                 options: {
-                    port: 9400
+                    hostname : '127.0.0.1',
+                    port: 9400,
+                    open : true
                 }
             }
         },
@@ -54,6 +56,7 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-karma');
 
+    grunt.registerTask('default', ['jshint','test']);
     grunt.registerTask('serve', ['jshint','connect', 'watch']);
     grunt.registerTask('build',['uglify','copy']);
     grunt.registerTask('test',['build','karma']);

@@ -4,8 +4,7 @@ module.exports = function(config) {
 
         basePath: 'dist/',
 
-        frameworks: ['jasmine-given','jasmine'],
-
+        frameworks: ['jasmine'],
 
         // list of files / patterns to load in the browser
         files: [
@@ -17,18 +16,23 @@ module.exports = function(config) {
             '../test/**/*.js'
         ],
 
-        reporters: ['progress'],
+        // web server port
+        port: 9876,
+
+
+        // enable / disable colors in the output (reporters and logs)
+        colors: true,
 
         logLevel: config.LOG_INFO,
 
         // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: true,
+        autoWatch: false,
 
         // Start these browsers
         browsers: ['PhantomJS'],
 
         // If browser does not capture in given timeout [ms], kill it
-        captureTimeout: 60000,
+        captureTimeout: 10000,
 
         // Continuous Integration mode
         // if true, it capture browsers, run tests and exit
