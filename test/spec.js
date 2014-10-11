@@ -1,40 +1,52 @@
 describe('ngJsTree', function() {
 
-    var scope,element;
+    var $log,$compile,$rootScope,scope,element;
 
-    /*
-    beforeEach(inject(function($rootScope,$compile,$q,$httpBackend,$templateCache,$timeout) {
-        scope = $rootScope.$new();
-        compile = $compile;
-        q = $q;
-        httpBackend = $httpBackend;
-        timeout = $timeout;
-    }));
-    */
+    beforeEach(module('ngJsTree'));
 
-    beforeEach(inject(function($rootScope, $compile) {
+    beforeEach(inject(function(_$compile_, _$rootScope_,_$log_){
+        $compile = _$compile_;
+        $rootScope = _$rootScope_;
+        $log = _$log_;
+
         scope = $rootScope.$new();
 
-        element = '<svg-circle size="{{size}}" stroke="black" fill="blue"></svg-circle>';
+        scope.data = [
+            { id : 'ajson1', parent : '#', text : 'Simple root node' },
+            { id : 'ajson2', parent : '#', text : 'Root node 2' },
+            { id : 'ajson3', parent : 'ajson2', text : 'Child 1' },
+            { id : 'ajson4', parent : 'ajson2', text : 'Child 2' }
+        ];
 
-        scope.size = 100;
+        scope.treeConfig = {
+            core : {
+                check_callback : true,
+                worker : false,
+                error : function(error) {
+                    $log.error('treeCtrl: error from js tree - ' + angular.toJson(error));
+                }
+            }
+        };
 
-        element = $compile(element)(scope);
-        scope.$digest();
+        element = angular.element('<div js-tree="treeConfig" ng-model="data" tree="treeInstance"></div>');
+        $compile(element)(scope);
+        $rootScope.$digest();
     }));
 
-    it('should use minDuration correctly.', function() {
-        expect(3).toBe(3);
+    it('tree data should have the same number of the original array', function() {
+        var isolated = element.isolateScope();
+        expect(isolated.treeData.length).toBe(element.scope().data.length);
     });
 
-    /*
-    it('assigning stuff to this', function() {
-        Given(function() { this.number = 24; });
-        Given(function() { this.number++; });
-        When(function() { this.number *= 2; });
-        Then(function() { return this.number === 50; });
-        // or
-        Then(function() { expect(this.number).toBe(50) });
+    it('the tree instance should be defined', function() {
+        expect(scope.treeInstance).toBeDefined()
     });
-    */
+
+    it('add node test', function() {
+        scope.data.push({ id : 'ajson5', parent : 'ajson2', text : 'New Child' });
+        $rootScope.$digest();
+        var node = scope.treeInstance.jstree(true).get_node('ajson5');
+        expect(node).toBeDefined();
+        expect(node.id).toEqual('ajson5');
+    });
 } );

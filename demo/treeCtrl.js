@@ -2,7 +2,7 @@
     'use strict';
 
     //// JavaScript Code ////
-    function treeCtrl($timeout,toaster) {
+    function treeCtrl($log,$timeout,toaster) {
         var newId = 1;
         this.ignoreChanges = false;
         this.newNode = {};
@@ -13,7 +13,12 @@
             { id : 'ajson4', parent : 'ajson2', text : 'Child 2' }
         ];
         this.treeConfig = {
-            code : {
+            core : {
+                multiple : false,
+                animation: true,
+                error : function(error) {
+                    $log.error('treeCtrl: error from js tree - ' + angular.toJson(error));
+                },
                 check_callback : true,
                 worker : true
             },
@@ -21,10 +26,10 @@
                 default : {
                     icon : 'glyphicon glyphicon-flash'
                 },
-                star : {
+                Star : {
                     icon : 'glyphicon glyphicon-star'
                 },
-                clod : {
+                Cloud : {
                     icon : 'glyphicon glyphicon-cloud'
                 }
             },
@@ -34,17 +39,20 @@
 
         this.addNewNode = function() {
             this.treeData.push({ id : (newId++).toString(), parent : this.newNode.parent, text : this.newNode.text});
-            toaster.pop('success', 'Node Added', 'Added new node with the text ' + this.newNode.text);
         };
 
         this.setNodeType = function() {
-            var item = _.findWhere(this.treeData,this.selectedNode);
+            var item = _.findWhere(this.treeData, { id : this.selectedNode } );
             item.type = this.newType;
-            toaster.pop('success', 'Node Type Changed', 'Changed the type of node ' + this.selectedNode.id);
+            toaster.pop('success', 'Node Type Changed', 'Changed the type of node ' + this.selectedNode);
         };
 
         this.readyCB = function() {
             $timeout(function() {toaster.pop('success', 'JS Tree Ready', 'Js Tree issued the ready event')});
+        };
+
+        this.createCB  = function(e,item) {
+            $timeout(function() {toaster.pop('success', 'Node Added', 'Added new node with the text ' + item.node.text)});
         };
     }
 

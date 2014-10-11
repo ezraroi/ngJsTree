@@ -48,7 +48,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading"><i class="glyphicon glyphicon-tree-conifer"></i> Js Tree</div>
                         <div class="panel-body">
-                            <div js-tree="vm.treeConfig" ng-model="vm.treeData" tree="vm.treeInstance" tree-events="ready:vm.readyCB">></div>
+                            <div js-tree="vm.treeConfig" ng-model="vm.treeData" tree="vm.treeInstance" tree-events="ready:vm.readyCB;create_node:vm.createCB"></div>
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,8 @@
                                 <div class="form-group">
                                     <label for="nodeParent" class="col-xs-3 control-label">Node Parent:</label>
                                     <div class="col-xs-9" ng-class="{ 'has-error' : newNodeForm.nodeParent.$invalid}">
-                                        <select class="form-control" id="nodeParent" name="nodeParent" ng-model="vm.newNode.parent" ng-options="node.id for node in vm.treeData" required>
+                                        <select class="form-control" id="nodeParent" name="nodeParent" ng-model="vm.newNode.parent" required>
+                                            <option ng-repeat="node in vm.treeData" value="{{node.id}}">{{node.text}}[{{node.id}}]</option>
                                         </select>
                                     </div>
                                 </div>
@@ -102,8 +103,8 @@
                                 <div class="form-group">
                                     <label for="nodeParent" class="col-xs-3 control-label">Node:</label>
                                     <div class="col-xs-9" ng-class="{ 'has-error' : nodeTypeForm.node.$invalid}">
-                                        <select class="form-control" id="node" name="node" ng-model="vm.selectedNode" ng-options="node.id for node in vm.treeData" required>
-
+                                        <select class="form-control" id="node" name="node" ng-model="vm.selectedNode" required>
+                                            <option ng-repeat="node in vm.treeData" value="{{node.id}}">{{node.text}}[{{node.id}}]</option>
                                         </select>
                                     </div>
                                 </div>
