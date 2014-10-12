@@ -7,10 +7,10 @@
         this.ignoreChanges = false;
         this.newNode = {};
         this.treeData = [
-            { id : 'ajson1', parent : '#', text : 'Simple root node' },
-            { id : 'ajson2', parent : '#', text : 'Root node 2' },
-            { id : 'ajson3', parent : 'ajson2', text : 'Child 1' },
-            { id : 'ajson4', parent : 'ajson2', text : 'Child 2' }
+            { id : 'ajson1', parent : '#', text : 'Simple root node', state: { opened: true} },
+            { id : 'ajson2', parent : '#', text : 'Root node 2', state: { opened: true} },
+            { id : 'ajson3', parent : 'ajson2', text : 'Child 1', state: { opened: true} },
+            { id : 'ajson4', parent : 'ajson2', text : 'Child 2' , state: { opened: true}}
         ];
         this.treeConfig = {
             core : {
@@ -38,7 +38,7 @@
 
 
         this.addNewNode = function() {
-            this.treeData.push({ id : (newId++).toString(), parent : this.newNode.parent, text : this.newNode.text});
+            this.treeData.push({ id : (newId++).toString(), parent : this.newNode.parent, text : this.newNode.text, state: { opened: true}});
         };
 
         this.setNodeType = function() {
