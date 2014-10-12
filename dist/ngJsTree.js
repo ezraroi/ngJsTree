@@ -88,6 +88,7 @@
             return self;
         };
     }
+    jsTreeCtrl.$inject = ['$scope'];
 
     function jsTreeDirective() {
         return {

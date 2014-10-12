@@ -48,10 +48,20 @@ module.exports = function (grunt) {
                 ]
             }
         },
+        ngAnnotate: {
+            options: {
+                singleQuotes: true
+            },
+            app : {
+                files : {
+                    'dist/ngJsTree.js' : ['dist/ngJsTree.js']
+                }
+            }
+        },
         uglify: {
             main: {
                 files: [
-                    {src:'ngJsTree.js',dest:'dist/ngJsTree.min.js'}
+                    {src:'dist/ngJsTree.js',dest:'dist/ngJsTree.min.js'}
                 ]
             }
         }
@@ -61,6 +71,6 @@ module.exports = function (grunt) {
 
     grunt.registerTask('serve',['connect:livereload','watch']);
     grunt.registerTask('default',['jshint','test']);
-    grunt.registerTask('build',['uglify','copy']);
+    grunt.registerTask('build',['copy','ngAnnotate','uglify']);
     grunt.registerTask('test',['build','karma']);
 };
