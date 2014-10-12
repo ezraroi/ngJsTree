@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/ezraroi/ngJsTree.svg?branch=master)](https://travis-ci.org/ezraroi/ngJsTree)
+[![Dependency Status](https://gemnasium.com/ezraroi/ngJsTree.svg)](https://gemnasium.com/ezraroi/ngJsTree)
+
 ngJsTree
 ========
 
