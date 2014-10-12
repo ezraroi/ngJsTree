@@ -3,7 +3,7 @@
 
 # bower
 
-bower_components
+/bower_components
 
 # Logs
 logs

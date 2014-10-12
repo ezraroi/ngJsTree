@@ -6,22 +6,25 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         connect: {
-            main: {
+            options: {
+                hostname : '127.0.0.1',
+                port: 9400,
+                livereload: 35729
+            },
+            livereload: {
                 options: {
-                    hostname : '127.0.0.1',
-                    port: 9400,
-                    open : true
+                    open: true
                 }
             }
         },
         watch: {
-            main: {
-                options: {
-                    livereload: true,
-                    livereloadOnError: false,
-                    spawn: false
-                },
-                files: ['ngJsTree.js','dist/**/*','demo/**/*'],
+            options: {
+                livereload: 35729,
+                livereloadOnError: false,
+                spawn: false
+            },
+            main :{
+                files: ['ngJsTree.js','demo/**/*','test/*.js'],
                 tasks: ['jshint','test']
             }
         },
@@ -56,8 +59,8 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-karma');
 
-    grunt.registerTask('default', ['jshint','test']);
-    grunt.registerTask('serve', ['jshint','connect', 'watch']);
+    grunt.registerTask('serve',['connect:livereload','watch']);
+    grunt.registerTask('default',['jshint','test']);
     grunt.registerTask('build',['uglify','copy']);
     grunt.registerTask('test',['build','karma']);
 };

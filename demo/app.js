@@ -4,5 +4,5 @@
     //// JavaScript Code ////
 
     //// Angular Code ////
-    angular.module('ngJsTreeDemo',['ngJsTree','ui.bootstrap','toaster']);
+    angular.module('ngJsTreeDemo',['ngJsTree','toaster']);
 })(angular);

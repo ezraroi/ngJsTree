@@ -26,10 +26,10 @@
                 default : {
                     icon : 'glyphicon glyphicon-flash'
                 },
-                Star : {
+                star : {
                     icon : 'glyphicon glyphicon-star'
                 },
-                Cloud : {
+                cloud : {
                     icon : 'glyphicon glyphicon-cloud'
                 }
             },
@@ -53,6 +53,10 @@
 
         this.createCB  = function(e,item) {
             $timeout(function() {toaster.pop('success', 'Node Added', 'Added new node with the text ' + item.node.text)});
+        };
+
+        this.applyModelChanges = function() {
+            return !this.ignoreChanges;
         };
     }
 

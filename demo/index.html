@@ -48,7 +48,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading"><i class="glyphicon glyphicon-tree-conifer"></i> Js Tree</div>
                         <div class="panel-body">
-                            <div js-tree="vm.treeConfig" ng-model="vm.treeData" tree="vm.treeInstance" tree-events="ready:vm.readyCB;create_node:vm.createCB"></div>
+                            <div js-tree="vm.treeConfig" should-apply="vm.applyModelChanges()" ng-model="vm.treeData" tree="vm.treeInstance" tree-events="ready:vm.readyCB;create_node:vm.createCB"></div>
                         </div>
                     </div>
                 </div>
@@ -112,9 +112,9 @@
                                     <label for="nodeParent" class="col-xs-3 control-label">Type:</label>
                                     <div class="col-xs-9" ng-class="{ 'has-error' : nodeTypeForm.newType.$invalid}">
                                         <select class="form-control" id="newType" name="newType" ng-model="vm.newType" required>
-                                            <option>Default</option>
-                                            <option>Star</option>
-                                            <option>Cloud</option>
+                                            <option value="default">Default</option>
+                                            <option value="star">Star</option>
+                                            <option value="cloud">Cloud</option>
                                         </select>
                                     </div>
                                 </div>
@@ -141,7 +141,6 @@
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-animate/angular-animate.min.js"></script>
         <script src="bower_components/jstree/dist/jstree.min.js"></script>
-        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
         <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
         <script src="bower_components/underscore/underscore-min.js"></script>
         <script src="../dist/ngJsTree.js"></script>

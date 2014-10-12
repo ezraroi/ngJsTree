@@ -89,7 +89,7 @@
         };
     }
 
-    function jsTreeDirective($log) {
+    function jsTreeDirective() {
         return {
             restrict: 'A',
             scope: {

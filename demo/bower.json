@@ -1,0 +1,25 @@
+{
+  "name": "ngJsTreeDemoApp",
+  "version": "1.0.0",
+  "homepage": "https://github.com/ezraroi/ngJsTree",
+  "authors": [
+    "Roi Ezra <ezraroi@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.26",
+    "angular-animate": "~1.2.26",
+    "bootstrap": "~3.2.0",
+    "jstree": "~3.0.4",
+    "underscore": "~1.7.0",
+    "AngularJS-Toaster": "~0.4.8"
+  }
+}
