@@ -21,7 +21,7 @@ The ngJsTree depends on the following libraries:
 You can install the ngJsTree with bower:
 
 ```bat
-bower install ngJsTree --save
+bower install ng-js-tree --save
 ```
 
 or you can add the ngJsTree.min.js file to your HTML page:
