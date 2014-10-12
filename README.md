@@ -1,3 +1,5 @@
+![Build Status](https://travis-ci.org/ezraroi/ngJsTree.svg?branch=master)
+
 ngJsTree
 ========
 
