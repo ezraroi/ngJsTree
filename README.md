@@ -57,7 +57,7 @@ You can register a callback for any Js Tree event in the following way:
 * add the  `tree-events` attribute and specify the name of the events to register for and a callback for each event.
 
 Example:
-```html```
+```html
 <div ng-controller='myCtrl'>
     <div js-tree="treeConfig" ng-model="treeData" should-apply="ignoreModelChanges()" tree="treeInstance"tree-events="ready:readyCB;create_node:createNodeCB"></div>
 </div>
