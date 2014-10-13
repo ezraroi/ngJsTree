@@ -4,6 +4,8 @@ module.exports = function (grunt) {
 
     require('load-grunt-tasks')(grunt);
 
+    grunt.loadNpmTasks('grunt-karma-coveralls');
+
     grunt.initConfig({
         connect: {
             options: {
@@ -64,6 +66,15 @@ module.exports = function (grunt) {
                     {src:'dist/ngJsTree.js',dest:'dist/ngJsTree.min.js'}
                 ]
             }
+        },
+        coveralls: {
+            options: {
+                debug: true,
+                coverage_dir: 'dist/coverage',
+                dryRun: false,
+                force: true,
+                recursive: true
+            }
         }
     });
 
@@ -72,5 +83,5 @@ module.exports = function (grunt) {
     grunt.registerTask('serve',['connect:livereload','watch']);
     grunt.registerTask('default',['jshint','test']);
     grunt.registerTask('build',['copy','ngAnnotate','uglify']);
-    grunt.registerTask('test',['build','karma']);
+    grunt.registerTask('test',['build','karma','coveralls']);
 };

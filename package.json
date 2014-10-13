@@ -34,13 +34,14 @@
     "karma": "^0.12.24",
     "karma-chrome-launcher": "^0.1.5",
     "karma-jasmine": "^0.1.5",
-    "karma-jasmine-given": "^0.1.1",
     "karma-phantomjs-launcher": "~0.1.4",
     "karma-sauce-launcher": "~0.1.8",
     "karma-script-launcher": "~0.1.0",
     "karma-story-reporter": "~0.2.2",
     "load-grunt-tasks": "~0.4.0",
-    "grunt-ng-annotate": "~0.4.0"
+    "grunt-ng-annotate": "~0.4.0",
+    "grunt-karma-coveralls": "^2.5.2",
+    "karma-coverage": "^0.2.6"
   },
   "dependencies": {}
 }

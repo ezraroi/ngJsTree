@@ -25,7 +25,16 @@ describe('ngJsTree', function() {
                 error : function(error) {
                     $log.error('treeCtrl: error from js tree - ' + angular.toJson(error));
                 }
-            }
+            },
+            types : {
+                default : {
+                    icon : 'glyphicon glyphicon-flash'
+                },
+                new : {
+                    icon : 'glyphicon glyphicon-flash'
+                }
+            },
+            plugins : ['types']
         };
 
         ignoreModel = false;
@@ -46,7 +55,7 @@ describe('ngJsTree', function() {
 
     it('tree data should have the same number of the original array', function() {
         var isolated = element.isolateScope();
-        expect(isolated.treeData.length).toBe(element.scope().data.length);
+        expect(isolated.treeData.length).toBe(scope.data.length);
     });
 
     it('the tree instance should be defined', function() {
@@ -59,6 +68,22 @@ describe('ngJsTree', function() {
         var node = scope.treeInstance.jstree(true).get_node('ajson5');
         expect(node).toBeDefined();
         expect(node.id).toEqual('ajson5');
+    });
+
+    it('remove node test', function() {
+        scope.data.splice(3,1);
+        $rootScope.$digest();
+        var node = scope.treeInstance.jstree(true).get_node('ajson4');
+        expect(node).toBeFalsy();
+        var isolated = element.isolateScope();
+        expect(isolated.treeData.length).toBe(scope.data.length);
+    });
+
+    it('change node type', function() {
+        scope.data[3].type = 'new';
+        $rootScope.$digest();
+        var type = scope.treeInstance.jstree(true).get_type('ajson4');
+        expect(type).toEqual('new');
     });
 
     it('test should apply is called', function() {

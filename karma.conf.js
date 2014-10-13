@@ -16,6 +16,22 @@ module.exports = function(config) {
             '../test/**/*.js'
         ],
 
+        reporters: ['coverage'],
+
+        preprocessors: {
+            "ngJsTree.js": ['coverage']
+        },
+        coverageReporter: {
+            type: "lcov",
+            dir: "coverage/"
+        },
+
+        plugins: [
+            'karma-coverage',
+            'karma-jasmine',
+            'karma-phantomjs-launcher'
+        ],
+
         // web server port
         port: 9876,
 

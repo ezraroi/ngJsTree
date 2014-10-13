@@ -4,7 +4,7 @@
 # bower
 
 /bower_components
-
+coverage
 # Logs
 logs
 *.log
