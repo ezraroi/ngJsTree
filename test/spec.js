@@ -101,16 +101,13 @@ describe('ngJsTree', function() {
         expect(node).toBeFalsy();
     });
 
-    it('test events are being called', function() {
-        spyOn(scope, 'createNodeCB');
-        runs(function() {
-            scope.data.push({ id : 'ajson5', parent : 'ajson2', text : 'New Child' });
-            $rootScope.$digest();
-        }, "an asynchronous method");
+    it('test events are being called', function(done) {
+        scope.data.push({ id : 'ajson5', parent : 'ajson2', text : 'New Child' });
+        $rootScope.$digest();
 
-        waitsFor(function() {
-            return callbackCalled === true;
-        }, "callback to be called", 1000);
+        setTimeout(function() {
+            expect(callbackCalled).toBeTruthy();
+            done();
+        }, 500);
     });
-
 } );
