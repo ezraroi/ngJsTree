@@ -28,7 +28,7 @@
         "README.md"
     ],
     "devDependencies": {
-        "angular-mocks": "~1.2.16",
+        "angular-mocks": "~1.2.26",
         "jquery": "~2.1.0"
     }
 }
