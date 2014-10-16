@@ -5,7 +5,6 @@
     function jsTreeCtrl($scope) {
         /*jshint validthis:true */
         var nodeSerialId = 1;
-        this.nodes = $scope.treeData;
 
         this.nodesFingerprint = function (e) {
             if (!e.__uiNodeId) {
@@ -17,13 +16,15 @@
         this.changeWatcher = function (arraySource, tokenFn) {
             var self;
             var getTokens = function () {
-                var array = angular.isFunction(arraySource) ? arraySource() : arraySource;
                 var result = [], token, el;
-                for (var i = 0, n = array.length; i < n; i++) {
-                    el = array[i];
-                    token = tokenFn(el);
-                    map[token] = el;
-                    result.push(token);
+                if (arraySource) {
+                    var array = angular.isFunction(arraySource) ? arraySource() : arraySource;
+                    for (var i = 0, n = array.length; i < n; i++) {
+                        el = array[i];
+                        token = tokenFn(el);
+                        map[token] = el;
+                        result.push(token);
+                    }
                 }
                 return result;
             };
@@ -100,7 +101,7 @@
             link: function (scope, elm, attrs, controller) {
 
                 var config = null,
-                    nodesWatcher = controller.changeWatcher(controller.nodes, controller.nodesFingerprint);
+                    nodesWatcher = controller.changeWatcher($scope.nodes, controller.nodesFingerprint);
 
                 var blocked = false;
 
