@@ -17,13 +17,15 @@
         this.changeWatcher = function (arraySource, tokenFn) {
             var self;
             var getTokens = function () {
-                var array = angular.isFunction(arraySource) ? arraySource() : arraySource;
                 var result = [], token, el;
-                for (var i = 0, n = array.length; i < n; i++) {
-                    el = array[i];
-                    token = tokenFn(el);
-                    map[token] = el;
-                    result.push(token);
+                if (arraySource) {
+                    var array = angular.isFunction(arraySource) ? arraySource() : arraySource;
+                    for (var i = 0, n = array.length; i < n; i++) {
+                        el = array[i];
+                        token = tokenFn(el);
+                        map[token] = el;
+                        result.push(token);
+                    }
                 }
                 return result;
             };

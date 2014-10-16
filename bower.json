@@ -1,6 +1,6 @@
 {
     "name": "ng-js-tree",
-    "main": "dist/ngJsTree.min.js",
+    "main": "dist/ngJsTree.js",
     "version": "0.0.1",
     "homepage": "https://github.com/ezraroi/ngJsTree",
     "authors": [
@@ -13,7 +13,7 @@
     ],
     "dependencies": {
         "angular": "~1.2",
-        "jstree" : "~3.0.3"
+        "jstree" : "~3.0.6"
     },
     "license": "MIT",
     "ignore": [
