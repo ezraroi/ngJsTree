@@ -5,7 +5,6 @@
     function jsTreeCtrl($scope) {
         /*jshint validthis:true */
         var nodeSerialId = 1;
-        this.nodes = $scope.treeData;
 
         this.nodesFingerprint = function (e) {
             if (!e.__uiNodeId) {
@@ -102,7 +101,7 @@
             link: function (scope, elm, attrs, controller) {
 
                 var config = null,
-                    nodesWatcher = controller.changeWatcher(controller.nodes, controller.nodesFingerprint);
+                    nodesWatcher = controller.changeWatcher($scope.nodes, controller.nodesFingerprint);
 
                 var blocked = false;
 
