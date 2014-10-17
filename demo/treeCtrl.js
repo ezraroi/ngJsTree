@@ -33,12 +33,12 @@
                     icon : 'glyphicon glyphicon-cloud'
                 }
             },
-            plugins : ['types']
+            plugins : ['types','checkbox']
         };
 
 
         this.addNewNode = function() {
-            this.treeData.push({ id : (newId++).toString(), parent : this.newNode.parent, text : this.newNode.text, state: { opened: true}});
+            this.treeData.push({ id : (newId++).toString(), parent : this.newNode.parent, text : this.newNode.text });
         };
 
         this.setNodeType = function() {
