@@ -59,9 +59,10 @@ You can register a callback for any Js Tree event in the following way:
 Example:
 ```html
 <div ng-controller='myCtrl'>
-    <div js-tree="treeConfig" ng-model="treeData" should-apply="ignoreModelChanges()" tree="treeInstance"tree-events="ready:readyCB;create_node:createNodeCB"></div>
+    <div js-tree="treeConfig" ng-model="treeData" should-apply="ignoreModelChanges()" tree="treeInstance" tree-events="ready:readyCB;create_node:createNodeCB"></div>
 </div>
 ```
+
 ```javascript
 angular.module('myApp').controller('myCtrl', function($scope,$log) {
     $scope.readyCB = function() {
@@ -72,11 +73,21 @@ angular.module('myApp').controller('myCtrl', function($scope,$log) {
         $log.info('create_node called');
     };
 );
-
 ```
 
+### Using the Js Tree API from your controller
+Add the tree attribute to the jstree directive and assign it with a name of a variable in your controller that will hold the jstree instance.
+```html
+<div ng-controller='myCtrl'>
+    <div js-tree="treeConfig" ng-model="treeData" tree="treeInstance"></div>
+</div>
+```
 
-
+```javascript
+function yourCtrl($scope)  {
+    var selected_nodes = $scope.treeInstance.jstree(true).get_selected();
+}
+```
 
 
 
