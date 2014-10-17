@@ -1,7 +1,7 @@
 {
     "name": "ng-js-tree",
     "main": "dist/ngJsTree.js",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "homepage": "https://github.com/ezraroi/ngJsTree",
     "authors": [
         "ezraroi <ezraroi@gmail.com>"
