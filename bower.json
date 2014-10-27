@@ -13,7 +13,7 @@
     ],
     "dependencies": {
         "angular": "~1.2",
-        "jstree" : "~3.0.6"
+        "jstree" : "~3.0.8"
     },
     "license": "MIT",
     "ignore": [
