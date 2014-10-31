@@ -15,12 +15,13 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.2.26",
+    "angular": "~1.3.0",
     "angular-bootstrap": "0.11.2",
-    "angular-animate": "~1.2.26",
-    "bootstrap": "~3.2.0",
-    "jstree": "~3.0.6",
+    "angular-animate": "~1.3.0",
+    "bootstrap": "~3.3.0",
+    "jstree": "~3.0.8",
     "underscore": "~1.7.0",
-    "AngularJS-Toaster": "~0.4.8"
+    "AngularJS-Toaster": "~0.4.8",
+    "angular-busy": "~4.1.1"
   }
 }

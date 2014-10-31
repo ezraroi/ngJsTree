@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="bower_components/jstree/dist/themes/default/style.min.css">
         <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css">
+        <link rel="stylesheet" href="bower_components/angular-busy/dist/angular-busy.css">
         <style>
             body {
                 padding-top: 50px;
@@ -42,7 +43,7 @@
                 </div>
             </div>
             <br/><br/>
-            <div class="row">
+            <div class="row" cg-busy="vm.promise">
                 <toaster-container></toaster-container>
                 <div class="col-xs-6">
                     <div class="panel panel-default">
@@ -63,6 +64,9 @@
                                         <input type="checkbox" ng-model="vm.ignoreChanges"> Ignore Model Changes
                                     </label>
                                 </div>
+                                <br/>
+                                <button class="btn btn-warning" type="button" ng-click="vm.reCreateTree()">Recreate Tree</button>
+                                <button class="btn btn-success" type="button" ng-click="vm.simulateAsyncData()">Load Async Node</button>
                             </form>
                         </div>
                     </div>
@@ -140,7 +144,8 @@
         <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-        <script src="bower_components/jstree/dist/jstree.min.js"></script>
+        <script src="bower_components/angular-busy/dist/angular-busy.js"></script>
+        <script src="bower_components/jstree/dist/jstree.js"></script>
         <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
         <script src="bower_components/underscore/underscore-min.js"></script>
         <script src="../dist/ngJsTree.js"></script>

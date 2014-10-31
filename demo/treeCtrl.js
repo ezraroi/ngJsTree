@@ -3,16 +3,20 @@
 
     //// JavaScript Code ////
     function treeCtrl($log,$timeout,toaster) {
+        var vm = this;
+
         var newId = 1;
-        this.ignoreChanges = false;
-        this.newNode = {};
-        this.treeData = [
+        vm.ignoreChanges = false;
+        vm.newNode = {};
+        vm.originalData = [
             { id : 'ajson1', parent : '#', text : 'Simple root node', state: { opened: true} },
             { id : 'ajson2', parent : '#', text : 'Root node 2', state: { opened: true} },
             { id : 'ajson3', parent : 'ajson2', text : 'Child 1', state: { opened: true} },
             { id : 'ajson4', parent : 'ajson2', text : 'Child 2' , state: { opened: true}}
         ];
-        this.treeConfig = {
+        vm.treeData = [];
+        angular.copy(vm.originalData,vm.treeData);
+        vm.treeConfig = {
             core : {
                 multiple : false,
                 animation: true,
@@ -33,12 +37,25 @@
                     icon : 'glyphicon glyphicon-cloud'
                 }
             },
+            version : 1,
             plugins : ['types','checkbox']
         };
 
 
-        this.addNewNode = function() {
-            this.treeData.push({ id : (newId++).toString(), parent : this.newNode.parent, text : this.newNode.text });
+        vm.reCreateTree = function() {
+            vm.ignoreChanges = true;
+            angular.copy(this.originalData,this.treeData);
+            vm.treeConfig.version++;
+        };
+
+        vm.simulateAsyncData = function() {
+            vm.promise = $timeout(function(){
+                vm.treeData.push({ id : (newId++).toString(), parent : vm.treeData[0].id, text : 'Async Loaded' })
+            },3000);
+        };
+
+        vm.addNewNode = function() {
+            vm.treeData.push({ id : (newId++).toString(), parent : vm.newNode.parent, text : vm.newNode.text });
         };
 
         this.setNodeType = function() {
@@ -48,7 +65,10 @@
         };
 
         this.readyCB = function() {
-            $timeout(function() {toaster.pop('success', 'JS Tree Ready', 'Js Tree issued the ready event')});
+            $timeout(function() {
+                vm.ignoreChanges = false;
+                toaster.pop('success', 'JS Tree Ready', 'Js Tree issued the ready event')
+            });
         };
 
         this.createCB  = function(e,item) {
@@ -56,7 +76,7 @@
         };
 
         this.applyModelChanges = function() {
-            return !this.ignoreChanges;
+            return !vm.ignoreChanges;
         };
     }
 
