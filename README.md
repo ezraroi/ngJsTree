@@ -89,7 +89,26 @@ function yourCtrl($scope)  {
 }
 ```
 
-
+### Recreating the Tree
+If from some reason you would like to recreate the tree, the right way to do it is update the tree configuration object. Once the directive will detect a change to the tree configuration it will destory the tree and recreate it. 
+```javascript
+this.treeConfig = {
+    core : {
+        multiple : false,
+        animation: true,
+        error : function(error) {
+            $log.error('treeCtrl: error from js tree - ' + angular.toJson(error));
+        },
+        check_callback : true,
+        worker : true
+    },
+    version : 1
+};
+this.reCreateTree = function() {
+    this.treeConfig.version++;
+}
+```
+* The reason i am using the version property is because it is not a JsTree config property, so it will not effect the tree.
 
 ## Development
 #### Prepare your environment
