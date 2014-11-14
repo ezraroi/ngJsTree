@@ -134,7 +134,14 @@
 
                 scope.destroy = function () {
                     if (attrs.tree) {
-                        scope.tree = scope.$parent[attrs.tree] = elm;
+                        if (attrs.tree.indexOf('.') !== -1) {
+                            var split = attrs.tree.split('.');
+                            scope.tree = scope.$parent[split[0]][split[1]] = elm;
+                        }
+                        else {
+                            scope.tree = scope.$parent[attrs.tree] = elm;
+                        }
+
                     } else {
                         scope.tree = elm;
                     }
