@@ -101,7 +101,9 @@
             link: function (scope, elm, attrs, controller) {
 
                 var config = null,
-                    nodesWatcher = controller.changeWatcher(scope.treeData, controller.nodesFingerprint);
+                nodesWatcher = controller.changeWatcher(function() {
+                    return scope.treeData;
+                }, controller.nodesFingerprint);
 
                 var blocked = false;
 
@@ -140,17 +142,18 @@
                 }
 
                 scope.destroy = function () {
+                    var jQuery_elm = $(elm);
                     if (attrs.tree) {
                         if (attrs.tree.indexOf('.') !== -1) {
                             var split = attrs.tree.split('.');
-                            scope.tree = scope.$parent[split[0]][split[1]] = elm;
+                            scope.tree = scope.$parent[split[0]][split[1]] = jQuery_elm;
                         }
                         else {
-                            scope.tree = scope.$parent[attrs.tree] = elm;
+                            scope.tree = scope.$parent[attrs.tree] = jQuery_elm;
                         }
 
                     } else {
-                        scope.tree = elm;
+                        scope.tree = jQuery_elm;
                     }
                     scope.tree.jstree('destroy');
                 };
