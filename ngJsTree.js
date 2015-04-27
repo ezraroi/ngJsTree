@@ -105,19 +105,13 @@
 
                 var blocked = false;
 
-                var dndEvents = ['dnd_scroll','dnd_start','dnd_move','dnd_stop'];
-
                 function manageEvents(s, e, a) {
                     if (a.treeEvents) {
                         var evMap = a.treeEvents.split(';');
                         for (var i = 0; i < evMap.length; i++) {
                             if (evMap[i].length > 0) {
                                 var name = evMap[i].split(':')[0];
-                                var extension = '.jstree';
-                                if (dndEvents.indexOf(name) !== -1) {
-                                    extension = '.vakata';
-                                }
-                                var evt = name + extension,
+                                var evt = name + '.jstree',
                                     cb = evMap[i].split(':')[1];
                                 s.tree.on(evt, s.$parent.$eval(cb));
                             }
