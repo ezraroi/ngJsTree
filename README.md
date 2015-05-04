@@ -28,10 +28,10 @@ bower install ng-js-tree --save
 
 or you can add the ngJsTree.min.js file to your HTML page:
 ```html
-<script src="jquery.js">
-<script src="angular.js">
-<script src="jstree.min.js">
-<script src="ngJsTree.min.js">
+<script src="jquery.js"/>
+<script src="angular.js"/>
+<script src="jstree.min.js"/>
+<script src="ngJsTree.min.js"/>
 ```
 
 #Documentation
