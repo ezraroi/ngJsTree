@@ -1,3 +1,4 @@
+[![Bower version](https://badge.fury.io/bo/ng-js-tree.svg)](http://badge.fury.io/bo/ng-js-tree)
 [![Build Status](https://travis-ci.org/ezraroi/ngJsTree.svg?branch=master)](https://travis-ci.org/ezraroi/ngJsTree)
 [![Dependency Status](https://gemnasium.com/ezraroi/ngJsTree.svg)](https://gemnasium.com/ezraroi/ngJsTree)
 [![Coverage Status](https://img.shields.io/coveralls/ezraroi/ngJsTree.svg)](https://coveralls.io/r/ezraroi/ngJsTree?branch=master)
