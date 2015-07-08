@@ -35,6 +35,9 @@ or you can add the ngJsTree.min.js file to your HTML page:
 <script src="ngJsTree.min.js"/>
 ```
 
+Add the `ngJsTree` to your module dependencies
+
+
 #Documentation
 
 
