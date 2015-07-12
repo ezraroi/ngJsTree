@@ -2,18 +2,18 @@ module.exports = function(config) {
 
     config.set({
 
-        basePath: 'dist/',
-
         frameworks: ['jasmine'],
 
         // list of files / patterns to load in the browser
         files: [
-            '../bower_components/jquery/dist/jquery.min.js',
-            '../bower_components/angular/angular.min.js',
-            '../bower_components/angular-mocks/angular-mocks.js',
-            '../bower_components/jstree/dist/jstree.min.js',
-            'ngJsTree.js',
-            '../test/**/*.js'
+            // bower:
+            'bower_components/jquery/dist/jquery.js',
+            'bower_components/angular/angular.js',
+            'bower_components/jstree/dist/jstree.js',
+            'bower_components/angular-mocks/angular-mocks.js',
+            // endbower
+            'dist/ngJsTree.js',
+            'test/**/*.js'
         ],
 
         reporters: ['coverage'],

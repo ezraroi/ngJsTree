@@ -98,7 +98,7 @@
                 shouldApply : '&'
             },
             controller: 'jsTreeCtrl',
-            link: function (scope, elm, attrs, controller) {
+            link: function link(scope, elm, attrs, controller) {
 
                 var config = null,
                     nodesWatcher = controller.changeWatcher(scope.treeData, controller.nodesFingerprint);
@@ -155,7 +155,9 @@
                 };
 
                 nodesWatcher.onChanged = function (node) {
-                    scope.tree.jstree(true).set_type(node.id, node.type);
+                    if (angular.isDefined(scope.tree.jstree(true).set_type)) {
+                        scope.tree.jstree(true).set_type(node.id, node.type);
+                    }
                     scope.tree.jstree(true).rename_node(node.id, node.text);
                 };
 

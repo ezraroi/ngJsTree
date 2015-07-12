@@ -67,10 +67,29 @@ module.exports = function (grunt) {
                 ]
             }
         },
+
+        wiredep: {
+            test: {
+                src: 'karma.conf.js',
+                fileTypes: {
+                    js: {
+                        block: /(([\s\t]*)\/\/\s*bower:*(\S*))(\n|\r|.)*?(\/\/\s*endbower)/gi,
+                        detect: {
+                            js: /'(.*\.js)'/gi
+                        },
+                        replace: {
+                            js: '\'{{filePath}}\','
+                        }
+                    }
+                },
+                devDependencies: true
+            }
+        },
+
         coveralls: {
             options: {
                 debug: true,
-                coverage_dir: 'dist/coverage',
+                coverageDir: 'coverage',
                 dryRun: false,
                 force: true,
                 recursive: true

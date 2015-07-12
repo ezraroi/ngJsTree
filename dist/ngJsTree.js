@@ -98,14 +98,12 @@
                 shouldApply : '&'
             },
             controller: 'jsTreeCtrl',
-            link: function (scope, elm, attrs, controller) {
+            link: function link(scope, elm, attrs, controller) {
 
                 var config = null,
                     nodesWatcher = controller.changeWatcher(scope.treeData, controller.nodesFingerprint);
 
                 var blocked = false;
-
-                var dndEvents = ['dnd_scroll','dnd_start','dnd_move','dnd_stop'];
 
                 function manageEvents(s, e, a) {
                     if (a.treeEvents) {
@@ -113,11 +111,7 @@
                         for (var i = 0; i < evMap.length; i++) {
                             if (evMap[i].length > 0) {
                                 var name = evMap[i].split(':')[0];
-                                var extension = '.jstree';
-                                if (dndEvents.indexOf(name) !== -1) {
-                                    extension = '.vakata';
-                                }
-                                var evt = name + extension,
+                                var evt = name + '.jstree',
                                     cb = evMap[i].split(':')[1];
                                 s.tree.on(evt, s.$parent.$eval(cb));
                             }
@@ -161,7 +155,9 @@
                 };
 
                 nodesWatcher.onChanged = function (node) {
-                    scope.tree.jstree(true).set_type(node.id, node.type);
+                    if (angular.isDefined(scope.tree.jstree(true).set_type)) {
+                        scope.tree.jstree(true).set_type(node.id, node.type);
+                    }
                     scope.tree.jstree(true).rename_node(node.id, node.text);
                 };
 
