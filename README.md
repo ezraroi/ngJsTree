@@ -27,6 +27,12 @@ You can install the ngJsTree with bower:
 bower install ng-js-tree --save
 ```
 
+or with npm:
+```bat
+npm install ng-js-tree --save
+```
+
+
 or you can add the ngJsTree.min.js file to your HTML page:
 ```html
 <script src="jquery.js"/>
