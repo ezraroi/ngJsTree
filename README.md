@@ -4,7 +4,7 @@
 [![Coverage Status](https://img.shields.io/coveralls/ezraroi/ngJsTree.svg)](https://coveralls.io/r/ezraroi/ngJsTree?branch=master)
 [![Code Climate](https://codeclimate.com/github/ezraroi/ngJsTree/badges/gpa.svg)](https://codeclimate.com/github/ezraroi/ngJsTree)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
-[![NPM](https://nodei.co/npm/<package>.png)](https://npmjs.org/package/ngJsTree?mini=true)
+[![NPM](https://nodei.co/npm/<package>.png)](https://npmjs.org/package/ng-js-tree?mini=true)
 ngJsTree
 ========
 
