@@ -23,7 +23,7 @@
   "dependencies": {
         "angular": "~1.4",
         "jstree" : "~3.2.1"
-    }
+    },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-bump": "0.3.1",
