@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NgJsTree Demo Page</title>
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/jstree/dist/themes/default/style.min.css">
+    <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css">
+    <link rel="stylesheet" href="bower_components/angular-busy/dist/angular-busy.css">
+    <style>
+        body {
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body ng-app="ngJsTreeDemo">
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><i class="glyphicon glyphicon-tree-conifer"></i> ng-JsTree</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Demo</a></li>
+                <li><a href="https://github.com/ezraroi/ngJsTree" target="_blank">GitHub Page</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+<div class="container" ng-controller="treeCtrl as vm">
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <h2>Welcome to the ng-JsTree Demo Page</h2>
+        </div>
+    </div>
+    <br/><br/>
+    <div class="row" cg-busy="vm.promise">
+        <toaster-container></toaster-container>
+        <div class="col-xs-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><i class="glyphicon glyphicon-tree-conifer"></i> Js Tree</div>
+                <div class="panel-body">
+                    <div js-tree="vm.treeConfig" should-apply="vm.applyModelChanges()" ng-model="vm.treeData" tree="vm.treeInstance" tree-events="ready:vm.readyCB;create_node:vm.createCB"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="glyphicon glyphicon-cog"></i> General Settings</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" novalidate role="form">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="vm.ignoreChanges"> Ignore Model Changes
+                            </label>
+                        </div>
+                        <br/>
+                        <button class="btn btn-warning" type="button" ng-click="vm.reCreateTree()">Re Create Tree</button>
+                        <button class="btn btn-success" type="button" ng-click="vm.simulateAsyncData()">Load Async Node</button>
+                        <button class="btn btn-info" type="button" ng-click="vm.treeInstanceDemo()">Call Method of Tree Instance</button>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="glyphicon glyphicon-plus"></i> Add Node</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" novalidate name="newNodeForm" role="form">
+                        <div class="form-group">
+                            <label for="addNode" class="col-xs-3 control-label">Node Text:</label>
+                            <div class="col-xs-9" ng-class="{ 'has-error' : newNodeForm.addNode.$invalid}">
+                                <input type="text" class="form-control" id="addNode" ng-model="vm.newNode.text" name="addNode" placeholder="Node Text" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nodeParent" class="col-xs-3 control-label">Node Parent:</label>
+                            <div class="col-xs-9" ng-class="{ 'has-error' : newNodeForm.nodeParent.$invalid}">
+                                <select class="form-control" id="nodeParent" name="nodeParent" ng-model="vm.newNode.parent" required>
+                                    <option ng-repeat="node in vm.treeData" value="{{node.id}}">{{node.text}}[{{node.id}}]</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="pull-right">
+                                    <button type="button" ng-disabled="newNodeForm.$invalid" ng-click="vm.addNewNode()" class="btn btn-success">Add Node</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="glyphicon glyphicon-edit"></i> Change Node Type</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" novalidate name="nodeTypeForm" role="form">
+                        <div class="form-group">
+                            <label for="nodeParent" class="col-xs-3 control-label">Node:</label>
+                            <div class="col-xs-9" ng-class="{ 'has-error' : nodeTypeForm.node.$invalid}">
+                                <select class="form-control" id="node" name="node" ng-model="vm.selectedNode" required>
+                                    <option ng-repeat="node in vm.treeData" value="{{node.id}}">{{node.text}}[{{node.id}}]</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nodeParent" class="col-xs-3 control-label">Type:</label>
+                            <div class="col-xs-9" ng-class="{ 'has-error' : nodeTypeForm.newType.$invalid}">
+                                <select class="form-control" id="newType" name="newType" ng-model="vm.newType" required>
+                                    <option value="default">Default</option>
+                                    <option value="star">Star</option>
+                                    <option value="cloud">Cloud</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="pull-right">
+                                    <button type="button" ng-disabled="nodeTypeForm.$invalid" ng-click="vm.setNodeType()" class="btn btn-success">Set Type</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <b>Raw Data:</b> {{ vm.treeData | json }}
+        </div>
+    </div>
+</div>
+<a class="hidden-xs hidden-sm" href="https://github.com/ezraroi/ngJsTree"><img style="z-index: 2000; position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub"></a>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-busy/dist/angular-busy.js"></script>
+<script src="bower_components/jstree/dist/jstree.js"></script>
+<script src="bower_components/AngularJS-Toaster/toaster.js"></script>
+<script src="bower_components/underscore/underscore-min.js"></script>
+<script src="ngJsTree.js"></script>
+<script src="app.js"></script>
+<script src="treeCtrl.js"></script>
+</body>
+</html>
