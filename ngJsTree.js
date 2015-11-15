@@ -137,7 +137,12 @@
                     if (attrs.tree) {
                         if (attrs.tree.indexOf('.') !== -1) {
                             var split = attrs.tree.split('.');
-                            scope.tree = scope.$parent[split[0]][split[1]] = elm;
+                            var tree = split.pop();
+                            var context = scope.$parent;
+                            for (var i = 0; i < split.length; i++) {
+                                context = context[split[i]];
+                            }
+                            scope.tree = context[tree] = elm;
                         }
                         else {
                             scope.tree = scope.$parent[attrs.tree] = elm;
