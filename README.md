@@ -65,8 +65,9 @@ You can find the JSTree documentation at [this link]
 
 
 ### Registering for events
-You can register a callback for any Js Tree event in the following way:
-* add the  `tree-events` attribute and specify the name of the events to register for and a callback for each event.
+You can register a callback for any Js Tree event in one of the following ways:
+
+* add the `tree-events` attribute and specify the name of the events to register for and a callback for each event.
 
 Example:
 ```html
@@ -80,12 +81,40 @@ angular.module('myApp').controller('myCtrl', function($scope,$log) {
     $scope.readyCB = function() {
         $log.info('ready called');
     };
-    
+
     $scope.createNodeCB = function(e,item) {
         $log.info('create_node called');
     };
 );
 ```
+
+* add the `tree-events-obj` attribute passing an object containing the list of events with the callback objects.
+
+Example:
+```html
+<div ng-controller='myCtrl'>
+    <div js-tree="treeConfig" ng-model="treeData" should-apply="ignoreModelChanges()" tree="treeInstance" tree-events-obj="treeEventsObj"></div>
+</div>
+```
+
+```javascript
+angular.module('myApp').controller('myCtrl', function($scope,$log) {
+
+    $scope.treeEventsObj = {
+      'ready': readyCB,
+      'create_node': createNodeCB
+    }
+
+    function readyCB() {
+        $log.info('ready called');
+    };
+
+    function createNodeCB(e,item) {
+        $log.info('create_node called');
+    };
+);
+```
+*NOTE:* Only one of the methods can be used to pass event callbacks, `tree-events` will take precedence.
 
 ### Using the Js Tree API from your controller
 Add the tree attribute to the jstree directive and assign it with a name of a variable in your controller that will hold the jstree instance.
@@ -102,7 +131,7 @@ function yourCtrl($scope)  {
 ```
 
 ### Recreating the Tree
-If from some reason you would like to recreate the tree, the right way to do it is update the tree configuration object. Once the directive will detect a change to the tree configuration it will destory the tree and recreate it. 
+If from some reason you would like to recreate the tree, the right way to do it is update the tree configuration object. Once the directive will detect a change to the tree configuration it will destory the tree and recreate it.
 ```javascript
 this.treeConfig = {
     core : {
@@ -120,7 +149,7 @@ this.reCreateTree = function() {
     this.treeConfig.version++;
 }
 ```
-* The reason i am using the version property is because it is not a JsTree config property, so it will not effect the tree.
+* The reason I am using the version property is because it is not a JsTree config property, so it will not effect the tree.
 
 ## Development
 #### Prepare your environment

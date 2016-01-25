@@ -5,15 +5,16 @@
     function jsTreeCtrl() {
         /*jshint validthis:true */
         var nodeSerialId = 1;
+        var vm = this;
 
-        this.nodesFingerprint = function (e) {
+        vm.nodesFingerprint = function (e) {
             if (!e.__uiNodeId) {
                 e.__uiNodeId = nodeSerialId++;
             }
             return '' + e.__uiNodeId + (e.id || '') + (e.text || '') + (e.type || '');
         };
 
-        this.changeWatcher = function (arraySource, tokenFn) {
+        vm.changeWatcher = function (arraySource, tokenFn) {
             var self;
             var getTokens = function () {
                 var result = [], token, el;
@@ -95,6 +96,7 @@
             restrict: 'A',
             scope: {
                 treeData: '=ngModel',
+                treeEventsObj: '=?treeEventsObj',
                 shouldApply : '&'
             },
             controller: 'jsTreeCtrl',
@@ -116,6 +118,11 @@
                                 s.tree.on(evt, s.$parent.$eval(cb));
                             }
                         }
+                    } else if (angular.isObject(s.treeEventsObj)) {
+                        angular.forEach(s.treeEventsObj, function(cb, name) {
+                            var evt = name + '.jstree';
+                            s.tree.on(evt, cb);
+                        });
                     }
                 }
 

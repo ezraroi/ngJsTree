@@ -45,6 +45,5 @@
     "grunt-karma-coveralls": "^2.5.2",
     "karma-coverage": "^0.2.6",
     "grunt-wiredep": "~2.0.0"
-  },
-  "dependencies": {}
+  }
 }
