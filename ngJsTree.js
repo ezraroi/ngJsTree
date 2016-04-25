@@ -1,5 +1,5 @@
 (function ($, undefined) {
-    "use strict";
+    'use strict';
     $.jstree.defaults.alltrigger = null;
     $.jstree.plugins.alltrigger = function (options, parent) {
         this.init = function (el, opts) {
@@ -11,16 +11,16 @@
                 var contextTrigger = $.vakata.context._trigger;
                 $.vakata.context._trigger = function (event_name) {
                     contextTrigger(event_name);
-                    options("context_" + event_name + ".vakata");
+                    options('context_' + event_name + '.vakata');
                 };
                 var dndTrigger = $.vakata.dnd._trigger;
                 $.vakata.dnd._trigger = function (event_name, e, data) {
                     dndTrigger(event_name, e, data);
-                    options("dnd_" + event_name + ".vakata", e, data);
+                    options('dnd_' + event_name + '.vakata', e, data);
                 };
             }
             parent.init.call(this, el, opts);
-        }
+        };
     };
 })(jQuery);
 (function (angular) {
@@ -133,6 +133,20 @@
 
                 var blocked = false;
 
+                function treeEventHandler(s, cb) {
+                    return function () {
+                        var args = arguments;
+                        var fn = s.$parent.$eval(cb);
+                        if (!s.$root.$$phase) {
+                            s.$parent.$apply(function () {
+                                fn.apply(s.$parent, args);
+                            });
+                        } else {
+                            fn.apply(s.$parent, args);
+                        }
+                    };
+                }
+
                 function manageEvents(s, e, a) {
                     if (a.treeEvents) {
                         var evMap = a.treeEvents.split(';');
@@ -141,20 +155,10 @@
                                 var name = evMap[i].split(':')[0];
                                 var cb = evMap[i].split(':')[1];
                                 events.push(name);
-                                if (name.indexOf(".vakata")) {
-                                    $(document).on(name, function () {
-                                        var args = arguments;
-                                        var fn = s.$parent.$eval(cb);
-                                        if (!s.$root.$$phase) s.$parent.$apply(function () { fn.apply(s.$parent, args); });
-                                        else fn.apply(s.$parent, args);
-                                    });
+                                if (name.indexOf('.vakata')) {
+                                    $(document).on(name, treeEventHandler(s, cb));
                                 } else {
-                                    s.tree.on(name, function () {
-                                        var args = arguments;
-                                        var fn = s.$parent.$eval(cb);
-                                        if (!s.$root.$$phase) s.$parent.$apply(function () { fn.apply(s.$parent, args); });
-                                        else fn.apply(s.$parent, args);
-                                    });
+                                    s.tree.on(name, treeEventHandler(s, cb));
                                 }
                             }
                         }
@@ -162,17 +166,25 @@
                     if (angular.isObject(s.treeEventsObj)) {
                         angular.forEach(s.treeEventsObj, function (cb, name) {
                             events.push(name);
-                            if (name.indexOf(".vakata")) {
+                            if (name.indexOf('.vakata')) {
                                 $(document).on(name, function () {
                                     var args = arguments;
-                                    if (!s.$root.$$phase) s.$parent.$apply(function () { cb.apply(s.$parent, args); });
-                                    else cb.apply(s.$parent, args);
+                                    if (!s.$root.$$phase) {
+                                        s.$parent.$apply(function () { cb.apply(s.$parent, args); });
+                                    } else {
+                                        cb.apply(s.$parent, args);
+                                    }
                                 });
                             } else {
                                 s.tree.on(name, function () {
                                     var args = arguments;
-                                    if (!s.$root.$$phase) s.$parent.$apply(function () { cb.apply(s.$parent, args); });
-                                    else cb.apply(s.$parent, args);
+                                    if (!s.$root.$$phase) {
+                                        s.$parent.$apply(function () {
+                                            cb.apply(s.$parent, args);
+                                        });
+                                    } else {
+                                        cb.apply(s.$parent, args);
+                                    }
                                 });
                             }
                         });
@@ -191,12 +203,14 @@
                         config.core = { data: scope.treeData };
                     }
                     if (config.plugins) {
-                        config.plugins.push("alltrigger");
+                        config.plugins.push('alltrigger');
                     } else {
-                        config.plugins = ["alltrigger"];
+                        config.plugins = ['alltrigger'];
                     }
                     config.alltrigger = function (name) {
-                        if (!scope.$root.$$phase && events.indexOf(name) == -1) scope.$apply();
+                        if (!scope.$root.$$phase && events.indexOf(name) === -1) {
+                            scope.$apply();
+                        }
                     };
                     return result;
                 }
@@ -272,6 +286,6 @@
     //// Angular Code ////
     var mi = angular.module('ngJsTree', []);
     mi.controller('jsTreeCtrl', jsTreeCtrl);
-    mi.directive('jsTree', ["$timeout", jsTreeDirective]);
+    mi.directive('jsTree', ['$timeout', jsTreeDirective]);
 
 })(angular);
