@@ -154,34 +154,40 @@
                             if (evMap[i].length > 0) {
                                 var name = evMap[i].split(':')[0];
                                 var cb = evMap[i].split(':')[1];
+                                if (name.indexOf('.') === -1) {
+                                    name += '.jstree';
+                                }
                                 events.push(name);
-                                if (name.indexOf('.vakata')) {
-                                    $(document).on(name, treeEventHandler(s, cb));
-                                } else {
+                                if (name.indexOf('.vakata') === -1) {
                                     s.tree.on(name, treeEventHandler(s, cb));
+                                } else {
+                                    $(document).on(name, treeEventHandler(s, cb));
                                 }
                             }
                         }
                     }
                     if (angular.isObject(s.treeEventsObj)) {
                         angular.forEach(s.treeEventsObj, function (cb, name) {
+                            if (name.indexOf('.') === -1) {
+                                name += '.jstree';
+                            }
                             events.push(name);
-                            if (name.indexOf('.vakata')) {
-                                $(document).on(name, function () {
-                                    var args = arguments;
-                                    if (!s.$root.$$phase) {
-                                        s.$parent.$apply(function () { cb.apply(s.$parent, args); });
-                                    } else {
-                                        cb.apply(s.$parent, args);
-                                    }
-                                });
-                            } else {
+                            if (name.indexOf('.vakata') === -1) {
                                 s.tree.on(name, function () {
                                     var args = arguments;
                                     if (!s.$root.$$phase) {
                                         s.$parent.$apply(function () {
                                             cb.apply(s.$parent, args);
                                         });
+                                    } else {
+                                        cb.apply(s.$parent, args);
+                                    }
+                                });
+                            } else {
+                                $(document).on(name, function () {
+                                    var args = arguments;
+                                    if (!s.$root.$$phase) {
+                                        s.$parent.$apply(function () { cb.apply(s.$parent, args); });
                                     } else {
                                         cb.apply(s.$parent, args);
                                     }

@@ -1,13 +1,14 @@
 describe('ngJsTree', function() {
 
-    var $log,$compile,$rootScope,scope,element, ignoreModel, callbackCalled;
+    var $log,$compile,$rootScope,$timeout,scope,element, ignoreModel, callbackCalled;
 
     beforeEach(module('ngJsTree'));
 
-    beforeEach(inject(function(_$compile_, _$rootScope_,_$log_){
+    beforeEach(inject(function(_$compile_, _$rootScope_,_$log_,_$timeout_){
         $compile = _$compile_;
         $rootScope = _$rootScope_;
         $log = _$log_;
+        $timeout = _$timeout_;
 
         scope = $rootScope.$new();
 
@@ -51,6 +52,7 @@ describe('ngJsTree', function() {
         element = angular.element('<div js-tree="treeConfig" ng-model="data" should-apply="applyModelChanges()" tree-events="create_node:createNodeCB" tree="treeInstance"></div>');
         $compile(element)(scope);
         $rootScope.$digest();
+        $timeout.flush();
     }));
 
     it('tree data should have the same number of the original array', function() {
@@ -63,8 +65,10 @@ describe('ngJsTree', function() {
     });
 
     it('add node test', function() {
-        scope.data.push({ id : 'ajson5', parent : 'ajson2', text : 'New Child' });
+        scope.data.push({ id : 'ajson5', parent : 'ajson2', text : 'New Child' });        
         $rootScope.$digest();
+        $timeout.flush();
+        $timeout.verifyNoPendingTasks();
         var node = scope.treeInstance.jstree(true).get_node('ajson5');
         expect(node).toBeDefined();
         expect(node.id).toEqual('ajson5');
@@ -103,8 +107,10 @@ describe('ngJsTree', function() {
 
     it('test events are being called', function(done) {
         scope.data.push({ id : 'ajson5', parent : 'ajson2', text : 'New Child' });
-        $rootScope.$digest();
-
+        $rootScope.$digest();        
+        $timeout.flush();
+        $timeout.verifyNoPendingTasks();
+        
         setTimeout(function() {
             expect(callbackCalled).toBeTruthy();
             done();
