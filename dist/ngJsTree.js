@@ -222,6 +222,7 @@
                 }
 
                 scope.destroy = function () {
+                    events = [];
                     if (attrs.tree) {
                         if (attrs.tree.indexOf('.') !== -1) {
                             var split = attrs.tree.split('.');
