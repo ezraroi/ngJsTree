@@ -12,7 +12,7 @@
         "JsTree"
     ],
     "dependencies": {
-        "angular": "~1.4",
+        "angular": "~1.5",
         "jstree" : "~3.2.1"
     },
     "license": "MIT",
