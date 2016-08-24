@@ -1,6 +1,6 @@
 {
   "name": "ng-js-tree",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Angular Directive for the famous JsTree",
   "main": "dist/ngJsTree.min.js",
   "scripts": {
