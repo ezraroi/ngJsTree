@@ -1,35 +1,38 @@
 {
-    "name": "ng-js-tree",
-    "main": "dist/ngJsTree.js",
-    "version": "0.0.9",
-    "homepage": "https://github.com/ezraroi/ngJsTree",
-    "authors": [
-        "ezraroi <ezraroi@gmail.com>"
-    ],
-    "description": "Angular directive for the famous JsTree",
-    "keywords": [
-        "Angular",
-        "JsTree"
-    ],
-    "dependencies": {
-        "angular": "~1.5",
-        "jstree" : "~3.2.1"
-    },
-    "license": "MIT",
-    "ignore": [
-        "**/.*",
-        "coverage",
-        "node_modules",
-        "bower_components",
-        "test",
-        "temp",
-        "demo",
-        "Gruntfile.js",
-        "package.json",
-        "README.md"
-    ],
-    "devDependencies": {
-        "angular-mocks": "~1.5",
-        "jquery": "~2.1.1"
-    }
+  "name": "ng-js-tree",
+  "main": "dist/ngJsTree.js",
+  "version": "0.0.9",
+  "homepage": "https://github.com/ezraroi/ngJsTree",
+  "authors": [
+    "ezraroi <ezraroi@gmail.com>"
+  ],
+  "description": "Angular directive for the famous JsTree",
+  "keywords": [
+    "Angular",
+    "JsTree"
+  ],
+  "dependencies": {
+    "angular": "~1.5",
+    "jstree": "~3.2.1"
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "coverage",
+    "node_modules",
+    "bower_components",
+    "test",
+    "temp",
+    "demo",
+    "Gruntfile.js",
+    "package.json",
+    "README.md"
+  ],
+  "devDependencies": {
+    "angular-mocks": "~1.5",
+    "jquery": "~2.1.1"
+  },
+  "resolutions": {
+    "angular": "1.5.8"
+  }
 }
