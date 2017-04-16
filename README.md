@@ -12,7 +12,7 @@ ngJsTree
 Angular Directive for the famous [JS Tree] library.
 
 
-##Dependencies
+## Dependencies
 
 
 The ngJsTree depends on the following libraries:
@@ -20,7 +20,7 @@ The ngJsTree depends on the following libraries:
 * JsTree
 
 
-##Install
+## Install
 
 
 You can install the ngJsTree with bower:
@@ -46,7 +46,7 @@ or you can add the ngJsTree.min.js file to your HTML page:
 Add the `ngJsTree` to your module dependencies
 
 
-#Documentation
+# Documentation
 
 
 You can find the JSTree documentation at [this link]
