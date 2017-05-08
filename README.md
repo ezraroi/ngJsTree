@@ -61,7 +61,7 @@ You can find the JSTree documentation at [this link]
 * `treeData` - The array with the elements of the tree, will be used for data binding (adding / removing / updating this data will be reflected in the tree).
 * `ignoreModelChanges()` - A method that returns true or false. when returning false, model changes will not be reflected in the tree (not mandatory).
 * `treeInstance` - The Js Tree instance will be assigned to this variable in your controller scope (not mandatory).
-* `ready:readyCB;create_node:createNodeCB` - List of Js Tree events and callbacks in your controller scope that will be called for each event (not mandatory.
+* `ready:readyCB;create_node:createNodeCB` - List of Js Tree events and callbacks in your controller scope that will be called for each event (not mandatory).
 
 
 ### Registering for events
