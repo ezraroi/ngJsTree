@@ -102,7 +102,8 @@ angular.module('myApp').controller('myCtrl', function($scope,$log) {
 
     $scope.treeEventsObj = {
       'ready': readyCB,
-      'create_node': createNodeCB
+      'create_node': createNodeCB,
+      'select_node': selectNodeCB   // on node selected callback
     }
 
     function readyCB() {
@@ -111,6 +112,10 @@ angular.module('myApp').controller('myCtrl', function($scope,$log) {
 
     function createNodeCB(e,item) {
         $log.info('create_node called');
+    };
+    
+    function selectNodeCB(node, selected, event) {
+        $log.info("some_node_selected");
     };
 );
 ```
