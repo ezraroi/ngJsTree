@@ -282,7 +282,7 @@
                     return scope.shouldApply();
                 });
 
-                scope.$watch(getOptions, function () {
+                scope.$watchGroup([ 'treeData', getOptions ], function () {
                     scope.destroy();
                     scope.init();
                 });
