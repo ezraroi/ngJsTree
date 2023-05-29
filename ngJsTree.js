@@ -262,7 +262,7 @@
                         while (blocked) { }
                         blocked = true;
                         var parent = scope.tree.jstree(true).get_node(node.parent);
-                        var res = scope.tree.jstree(true).create_node(parent, node, 'inside', function () {
+                        var res = scope.tree.jstree(true).create_node(parent, node, 'last', function () {
                             blocked = false;
                         });
                         if (!res) {
